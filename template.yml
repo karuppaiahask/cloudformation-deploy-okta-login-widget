@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: Create an S3 Bucket, and Deploy Okta Login Widget
+Parameters:
+  oktaOrg:
+    Type: String
+    Description: Name of Okta Org
+    Default: https://companyx.okta.com
+
+  bucketname:
+    Type: String
+    Description: name of bucket
+
+Outputs:
+  widgeturl:
+    Value: !Sub "You can access your Okta Login Widget Here: https://s3.amazonaws.com/${bucketname}/index.html"
+
+Resources:
+  deploytos3:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs6.10
+      CodeUri: lambdaDeployLoginWidgetToS3
+      MemorySize: 512
+      Timeout: 300
+      Environment:
+        Variables:
+          TEST: WORKS
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonS3FullAccess
+
+  DeploymentCustomResource:
+    Type: Custom::deploytos3
+    Properties:
+      ServiceToken: !GetAtt deploytos3.Arn
+      oktaOrg: !Ref oktaOrg
+      bucketname: !Ref bucketname
+
