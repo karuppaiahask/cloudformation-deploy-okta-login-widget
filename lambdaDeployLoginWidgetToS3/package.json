@@ -1,0 +1,14 @@
+{
+  "name": "oktaloginwidgettos3",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+    "aws-sdk": "latest",
+    "https": "latest",
+    "request": "^2.87.0",
+    "url": "latest"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

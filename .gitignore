@@ -1,0 +1,7 @@
+.idea/*
+node_modules/*
+output.yml
+output.yaml
+lambdaDeployLoginWidgetToS3/node_modules/*
+deploy.sh
+
