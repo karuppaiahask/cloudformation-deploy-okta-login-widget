@@ -32,7 +32,7 @@
 </body>
 
 <script>
-    var signIn = new OktaSignIn({baseUrl: {oktaOrg}});
+    var signIn = new OktaSignIn({baseUrl: '{oktaOrg}'});
     signIn.renderEl({
         el: '#widget-container'
     }, function success(res) {
